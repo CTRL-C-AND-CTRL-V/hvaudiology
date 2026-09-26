@@ -1,0 +1,14 @@
+/*
+  Hunter Valley Audiology: stylesheet entry point.
+  Cascade layers fix the override order, so a component rule never has to fight specificity:
+  tokens < base < layout < components < pages < utilities.
+  In a framework build, replace these imports with the bundler's CSS pipeline; the layer order stays.
+*/
+@layer tokens, base, layout, components, pages, utilities;
+
+@import url("tokens.css") layer(tokens);
+@import url("base.css") layer(base);
+@import url("layout.css") layer(layout);
+@import url("components.css") layer(components);
+@import url("pages.css") layer(pages);
+@import url("utilities.css") layer(utilities);

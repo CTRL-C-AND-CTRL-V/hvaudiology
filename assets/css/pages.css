@@ -1,0 +1,529 @@
+/* Page-specific styles. Only what a single page needs; anything reused belongs in components.css. */
+
+/* ---------- Home rhythm ----------
+   The home page runs many sections in a row, so it gets a roomier gap than inner pages. */
+
+.page-home {
+  --section-gap: clamp(88px, 10vw, 144px);
+}
+
+.page-home .section-head {
+  margin-bottom: var(--space-64);
+}
+
+/* ---------- Home hero ----------
+   Left: pill, italic serif headline, large subhead, brand strip pinned to the bottom.
+   Right: tall video card with a green wash and conversation bubbles inside it. */
+
+.hero {
+  padding-block: var(--space-64) var(--space-80);
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: var(--space-64);
+  align-items: stretch;
+}
+
+.hero__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-48);
+  padding-block: var(--space-8);
+}
+
+.hero__pill {
+  align-self: flex-start;
+  padding: 7px 14px;
+  background: var(--surface-canvas);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-halo);
+  font-size: 0.9375rem;
+  font-weight: var(--weight-medium);
+  letter-spacing: -0.01em;
+  color: var(--text-accent);
+}
+
+.hero__pill a {
+  text-decoration: none;
+}
+
+.hero__pill a:hover {
+  text-decoration: underline;
+}
+
+.hero__title {
+  font-style: italic;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+
+.hero__title em {
+  font-style: italic;
+}
+
+.hero__subhead {
+  max-width: 34rem;
+  margin-top: var(--space-32);
+  font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.125rem);
+  font-weight: var(--weight-medium);
+  line-height: 1.25;
+  letter-spacing: -0.028em;
+  color: var(--text-primary);
+}
+
+.hero__strip {
+  display: grid;
+  gap: var(--space-16);
+}
+
+.hero__strip-label {
+  font-size: var(--text-body-sm);
+  color: var(--text-muted);
+}
+
+/* Video card */
+.hero__card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  height: 100%;
+  border-radius: var(--radius-card-lg);
+  background: var(--surface-inverted);
+  box-shadow: var(--shadow-float);
+}
+
+/* Landscape footage in a portrait card: bias the crop left to keep the patient and otoscope in frame */
+.hero__card video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 35% 50%;
+}
+
+.bubble {
+  position: absolute;
+  z-index: 2;
+  font-weight: var(--weight-medium);
+  line-height: 1.25;
+  animation: bubble-in 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.bubble--greeting {
+  top: var(--space-24);
+  right: var(--space-24);
+  padding: 12px 22px;
+  background: rgb(28 43 39 / 0.3);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25);
+  font-size: 1.125rem;
+  color: var(--text-inverse);
+  animation-delay: 0.25s;
+}
+
+.bubble-stack {
+  position: absolute;
+  z-index: 2;
+  left: var(--space-24);
+  right: var(--space-24);
+  bottom: var(--space-24);
+  display: grid;
+  justify-items: start;
+}
+
+.bubble--status {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-left: var(--space-20);
+  padding: 10px 14px 8px;
+  background: rgb(255 255 255 / 0.92);
+  border-radius: var(--radius-icon) var(--radius-icon) 0 0;
+  font-size: var(--text-body-sm);
+  color: var(--text-secondary);
+  animation-delay: 0.5s;
+}
+
+.bubble--status svg {
+  color: var(--text-accent);
+}
+
+.bubble--question {
+  position: static;
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  width: 100%;
+  padding: var(--space-20) var(--space-24);
+  background: var(--surface-canvas);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-halo);
+  font-size: clamp(1.125rem, 0.95rem + 0.6vw, 1.5rem);
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  animation-delay: 0.5s;
+}
+
+.typing {
+  display: inline-flex;
+  flex: none;
+  gap: 4px;
+}
+
+.typing i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-forest-grove);
+  animation: typing 1.2s ease-in-out infinite;
+}
+
+.typing i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.typing i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes typing {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding-top: var(--space-40);
+  }
+
+  .hero__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-48);
+  }
+
+  .hero__copy {
+    gap: var(--space-40);
+  }
+
+  .hero__visual {
+    max-width: 480px;
+  }
+
+  .hero__card {
+    height: auto;
+  }
+}
+
+/* ---------- Home about ---------- */
+
+.hero + .section {
+  padding-top: var(--space-48);
+}
+
+.about-intro {
+  display: grid;
+  gap: var(--space-20);
+  max-width: 34rem;
+}
+
+.about-intro .h2 {
+  margin-top: calc(-1 * var(--space-8));
+}
+
+.about-intro__body {
+  font-size: var(--text-prose);
+  line-height: var(--leading-prose);
+  color: var(--text-secondary);
+}
+
+.about-intro .btn {
+  margin-top: var(--space-8);
+}
+
+.about-visual {
+  position: relative;
+  padding-bottom: var(--space-40);
+}
+
+.about-visual .media {
+  aspect-ratio: 5 / 4;
+  border-radius: var(--radius-card-lg);
+}
+
+.about-visual img {
+  object-position: 50% 40%; /* keep the hearing aid in frame */
+}
+
+/* Note card overlapping the bottom edge of the photo */
+.about-visual__note {
+  position: absolute;
+  right: var(--space-24);
+  bottom: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  max-width: 22rem;
+  padding: var(--space-20) var(--space-24);
+  background: var(--surface-canvas);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-halo);
+  font-size: var(--text-body-sm);
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.about-visual__note strong {
+  display: block;
+  margin-top: 4px;
+  font-weight: var(--weight-medium);
+  color: var(--text-accent);
+}
+
+.about-visual__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+  background: var(--surface-card);
+  color: var(--text-accent);
+}
+
+@media (max-width: 560px) {
+  .about-visual {
+    padding-bottom: 0;
+  }
+
+  .about-visual__note {
+    position: relative;
+    right: auto;
+    margin: calc(-1 * var(--space-40)) var(--space-16) 0;
+  }
+}
+
+/* ---------- Home getting started ----------
+   Mist Gray panel: intro and CTAs on the left, three connected step cards on the right. */
+
+.journey {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-64);
+  padding: var(--space-48);
+  background: var(--surface-card);
+  border-radius: var(--radius-card-lg);
+}
+
+.journey__intro {
+  display: grid;
+  align-content: start;
+  gap: var(--space-16);
+}
+
+.journey__title {
+  font-size: var(--text-heading-lg);
+  line-height: var(--leading-heading-lg);
+  letter-spacing: var(--tracking-heading-lg);
+}
+
+.journey__intro > p:not(.label) {
+  max-width: 26rem;
+  font-size: var(--text-prose);
+  color: var(--text-secondary);
+}
+
+.journey__intro .cluster {
+  margin-top: var(--space-16);
+}
+
+.journey__steps {
+  position: relative;
+  display: grid;
+  gap: var(--space-16);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Dotted path from each step number down to the next one */
+.journey-step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--space-24) + 40px);
+  bottom: calc(-1 * (var(--space-16) + var(--space-24)));
+  left: 19.5px;
+  width: 1px;
+  background-image: linear-gradient(var(--color-forest-grove) 50%, transparent 0);
+  background-size: 1px 8px;
+}
+
+.journey-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: var(--space-20);
+  align-items: start;
+}
+
+.journey-step__num {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  margin-top: var(--space-24);
+  border-radius: var(--radius-pill);
+  background: var(--surface-canvas);
+  box-shadow: inset 0 0 0 1px var(--border-accent);
+  font-weight: var(--weight-semibold);
+  color: var(--text-accent);
+}
+
+.journey-step:first-child .journey-step__num {
+  background: var(--surface-brand);
+  box-shadow: none;
+  color: var(--text-inverse);
+}
+
+.journey-step__card {
+  display: grid;
+  gap: var(--space-8);
+  padding: var(--space-24);
+  background: var(--surface-canvas);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-halo);
+}
+
+.journey-step__card p {
+  color: var(--text-secondary);
+}
+
+.journey-step__tag {
+  justify-self: start;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: rgb(11 131 92 / 0.1);
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  color: var(--text-accent) !important;
+}
+
+.journey-step__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-self: start;
+  margin-top: var(--space-8);
+  font-size: var(--text-body-sm);
+  font-weight: var(--weight-medium);
+  color: var(--text-accent);
+  text-decoration: none;
+}
+
+.journey-step__link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .journey {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-32);
+    padding: var(--space-24);
+  }
+}
+
+@media (max-width: 480px) {
+  .journey {
+    padding: var(--space-16);
+  }
+
+  .journey-step {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: var(--space-12);
+  }
+
+  .journey-step__num {
+    width: 32px;
+    height: 32px;
+  }
+
+  .journey-step:not(:last-child)::before {
+    top: calc(var(--space-24) + 32px);
+    left: 15.5px;
+  }
+}
+
+/* ---------- Home contact ---------- */
+
+/* Soft sound-wave lines behind the section, swelling behind the intro text */
+.enquire {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.enquire::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("../img/sound-wave.svg") left bottom / 100% min(360px, 45%) no-repeat;
+  pointer-events: none;
+}
+
+.enquire__intro {
+  display: grid;
+  gap: var(--space-16);
+}
+
+.enquire__intro > p:not(.label) {
+  color: var(--text-secondary);
+  font-size: var(--text-prose);
+}
+
+.enquire__intro .details {
+  margin-top: var(--space-16);
+}
+
+/* ---------- About ---------- */
+
+.founder__portrait {
+  display: grid;
+  gap: var(--space-16);
+}
+
+.founder__social {
+  display: flex;
+  gap: var(--space-8);
+}
+
+/* ---------- Booking ---------- */
+
+.booking-aside {
+  display: grid;
+  gap: var(--space-16);
+}
+
+/* ---------- 404 ---------- */
+
+.not-found {
+  padding-block: var(--space-96);
+}
