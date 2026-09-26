@@ -99,6 +99,6 @@
   --page-max-width: 1200px;
   --gutter: clamp(16px, 4vw, 32px);
   --section-gap: clamp(56px, 7vw, 80px);
-  --header-height: 72px;
+  --header-height: 80px;
   --measure: 36rem;
 }

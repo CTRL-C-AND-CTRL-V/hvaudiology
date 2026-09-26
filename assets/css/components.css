@@ -58,9 +58,20 @@
   letter-spacing: -0.015em;
 }
 
-.brand svg {
-  flex: none;
-  color: var(--text-accent);
+.brand__logo {
+  width: auto;
+  height: 64px;
+  margin-block: 6px;
+}
+
+@media (max-width: 560px) {
+  .brand__logo {
+    height: 56px;
+  }
+}
+
+.site-footer .brand__logo {
+  height: 88px;
 }
 
 .site-nav {
